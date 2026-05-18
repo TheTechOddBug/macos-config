@@ -79,6 +79,7 @@ brew bundle --file=Brewfile
 bash macos-defaults.sh
 
 # 3. Symlink configs into ~/
+bash link.sh
 
 # 4. Install tmux plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
