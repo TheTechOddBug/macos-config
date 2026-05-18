@@ -66,26 +66,26 @@ persistent-workspaces = ["1", "2", "3", "4", "5"]
 
 # ─── Auto-placement rules ────────────────────────────────────────────
 
-# Workspace 1 — code (external)
-[[on-window-detected]]
-if.app-id = 'dev.zed.Zed'
-run = ['move-node-to-workspace 1']
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = ['move-node-to-workspace 1']
-
-# Workspace 2 — web (external)
+# Workspace 1 — web (external)
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'com.brave.Browser'
-run = ['move-node-to-workspace 2']
+run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
+run = ['move-node-to-workspace 1']
+
+# Workspace 2 — code (external)
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
 run = ['move-node-to-workspace 2']
 
 # Workspace 4 — comms (built-in)
