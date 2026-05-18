@@ -1,121 +1,128 @@
 config-version = 2
-after-startup-command = [
-    'exec-and-forget /bin/bash -lc "~/.config/borders/bordersrc"',
-    'exec-and-forget /opt/homebrew/bin/sketchybar',
-    'exec-and-forget /bin/bash -lc "~/.config/sketchybar/plugins/space_windows.sh"'
-]
+
+# No startup hooks — SketchyBar and JankyBorders removed
 start-at-login = true
+
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
-accordion-padding = 200
+accordion-padding = 30
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
-on-focus-changed = [
-    'exec-and-forget /bin/bash -c "sketchybar --trigger front_app_switched INFO=$(aerospace list-windows --focused --format %{app-name})"',
-    'exec-and-forget /bin/bash -c "for sid in 1 2 3 4; do sketchybar --trigger aerospace_workspace_change NAME=space.$sid FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused); done"',
-    'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh'
-]
 automatically-unhide-macos-hidden-apps = false
 
-persistent-workspaces = ["1", "2", "3", "4"]
+persistent-workspaces = ["1", "2", "3", "4", "5"]
 
 [workspace-to-monitor-force-assignment]
-    1 = 'secondary'
-    2 = 'secondary'
-    3 = 'built-in'
-    4 = 'built-in'
+    1 = 'secondary'  # external — code
+    2 = 'secondary'  # external — web
+    3 = 'secondary'  # external — infra
+    4 = 'built-in'   # built-in — comms
+    5 = 'built-in'   # built-in — meetings
+
+[gaps]
+    inner.horizontal = 6
+    inner.vertical   = 6
+    outer.left       = 6
+    outer.right      = 6
+    outer.bottom     = 6
+    outer.top        = 6
 
 [key-mapping]
     preset = 'qwerty'
 
-[gaps]
-    inner.horizontal = 9
-    inner.vertical =   9
-    outer.left =       9
-    outer.bottom =     9
-    outer.top =        [{ monitor.'built-in' = 14 }, 50]
-    outer.right =      9
-
 [mode.main.binding]
-    shift-alt-p = 'layout tiles horizontal vertical'
-    shift-alt-y = 'layout tiles vertical'
-    shift-alt-r = 'layout tiles horizontal'
-    shift-alt-q = 'layout floating'
-    shift-alt-n = 'layout tiles'
-    shift-alt-a = 'layout accordion'
-    shift-alt-t = 'layout floating tiling'
-
+    # Focus
     alt-h = 'focus left'
     alt-j = 'focus down'
     alt-k = 'focus up'
     alt-l = 'focus right'
 
-    ctrl-alt-shift-cmd-h = 'focus left'
-    ctrl-alt-shift-cmd-j = 'focus down'
-    ctrl-alt-shift-cmd-k = 'focus up'
-    ctrl-alt-shift-cmd-l = 'focus right'
+    # Move window in direction
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
 
-    ctrl-alt-h = 'swap left'
-    ctrl-alt-j = 'swap down'
-    ctrl-alt-k = 'swap up'
-    ctrl-alt-l = 'swap right'
+    # Switch workspace
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
 
-    alt-shift-h = 'resize width -50'
-    alt-shift-j = 'resize height +50'
-    alt-shift-k = 'resize height -50'
-    alt-shift-l = 'resize width +50'
+    # Move focused window to workspace
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-5 = 'move-node-to-workspace 5'
 
-    ctrl-alt-shift-cmd-1 = ['workspace 1', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=1']
-    ctrl-alt-shift-cmd-2 = ['workspace 2', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=2']
-    ctrl-alt-shift-cmd-3 = ['workspace 3', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=3']
-    ctrl-alt-shift-cmd-4 = ['workspace 4', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=4']
-
-    alt-shift-1 = ['move-node-to-workspace 1', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
-    alt-shift-2 = ['move-node-to-workspace 2', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
-    alt-shift-3 = ['move-node-to-workspace 3', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
-    alt-shift-4 = ['move-node-to-workspace 4', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
-
-
-    shift-alt-enter = 'flatten-workspace-tree'
+    # Last workspace
     alt-tab = 'workspace-back-and-forth'
-    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
-    alt-shift-semicolon = 'mode service'
 
-    ctrl-alt-enter = 'fullscreen'
-    shift-alt-f = 'macos-native-fullscreen'
+    # Fullscreen
+    alt-f = 'fullscreen'
 
-    # Hyper (Caps Lock) shortcuts for common actions
-    ctrl-alt-shift-cmd-tab = 'workspace-back-and-forth'
-    ctrl-alt-shift-cmd-enter = 'fullscreen'
-    ctrl-alt-shift-cmd-f = 'macos-native-fullscreen'
-    ctrl-alt-shift-cmd-t = 'layout floating tiling'
-    ctrl-alt-shift-cmd-e = 'flatten-workspace-tree'
-    ctrl-alt-shift-cmd-semicolon = 'mode service'
 
-[mode.service.binding]
-    esc = ['reload-config', 'mode main']
-    r = ['flatten-workspace-tree', 'mode main']
-    f = ['layout floating tiling', 'mode main']
-    backspace = ['close-all-windows-but-current', 'mode main']
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
+# ─── Auto-placement rules ────────────────────────────────────────────
+
+# Workspace 1 — code (external)
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.systempreferences'
-run = 'layout floating'
+if.app-id = 'com.mitchellh.ghostty'
+run = ['move-node-to-workspace 1']
+
+# Workspace 2 — web (external)
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.calculator'
-run = 'layout floating'
+if.app-id = 'com.apple.Safari'
+run = ['move-node-to-workspace 2']
+
+# Workspace 4 — comms (built-in)
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'WhatsApp'
+run = ['move-node-to-workspace 4']
+
+# Workspace 5 — meetings (built-in)
+[[on-window-detected]]
+if.app-id = 'us.zoom.xos'
+run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-name-regex-substring = '(?i)zoom'
+run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = ['move-node-to-workspace 5']
+
+
+# ─── Floating utilities (transient, popup-like windows) ──────────────
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.shottr.Shottr'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -123,36 +130,11 @@ if.app-id = 'com.raycast.macos'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'WhatsApp'
+if.app-id = 'com.apple.calculator'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'us.zoom.xos'
-run = ['move-node-to-workspace 4', 'layout tiles']
-
-[[on-window-detected]]
-if.app-name-regex-substring = '(?i)zoom'
-run = ['move-node-to-workspace 4', 'layout tiles']
-
-[[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
-run = ['move-node-to-workspace 1']
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = ['move-node-to-workspace 1']
-
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['move-node-to-workspace 3']
-
-[[on-window-detected]]
-if.app-id = 'com.apple.mail'
-run = ['move-node-to-workspace 3']
-
-# Floating utilities — popups/small windows that tile awkwardly
-[[on-window-detected]]
-if.app-id = 'net.freemacsoft.AppCleaner'
+if.app-id = 'com.apple.systempreferences'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -160,15 +142,11 @@ if.app-id = 'com.bitwarden.desktop'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.docker.docker'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.loom.desktop'
-run = 'layout floating'
-
-[[on-window-detected]]
 if.app-id = 'com.onmyway133.PastePal'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.shottr.Shottr'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -176,18 +154,5 @@ if.app-id = 'com.apple.SFSymbols'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'leits.MeetingBar'
+if.app-id = 'net.freemacsoft.AppCleaner'
 run = 'layout floating'
-
-# Pin to workspace 2 (scratch on external)
-[[on-window-detected]]
-if.app-id = 'com.spotify.client'
-run = ['move-node-to-workspace 2']
-
-[[on-window-detected]]
-if.app-id = 'dev.zed.Zed'
-run = ['move-node-to-workspace 2']
-
-[[on-window-detected]]
-if.app-id = 'com.anthropic.claudefordesktop'
-run = ['move-node-to-workspace 2']

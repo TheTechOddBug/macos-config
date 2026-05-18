@@ -1,74 +1,73 @@
 # macOS config
 
-My macOS development environment. AeroSpace tiling, SketchyBar, JankyBorders, Hyperkey, tmux. Vesper theme everywhere, JetBrainsMono Nerd Font, Ghostty terminal, Zed editor.
+My macOS development environment. Senior-engineer minimum: AeroSpace for keyboard-driven window management on top of stock macOS, JetBrainsMono Nerd Font, Ghostty + tmux + sesh. Boring on purpose.
 
 ## Stack
 
 | Layer | Tool |
 |------|------|
-| Window manager | **AeroSpace** -- pinned workspaces (1–2 external, 3–4 built-in) |
-| Status bar | **SketchyBar** -- workspace pills, meeting widget (icalBuddy), CPU, memory, volume, battery, date |
-| Window borders | **JankyBorders** -- Vesper orange (active) / dark gray (inactive) |
-| Modifier key | **Hyperkey** -- Caps Lock → Ctrl+Alt+Shift+Cmd (tap = Esc) |
-| Terminal | **Ghostty** -- Vesper, JetBrainsMono 16, native tabs disabled (use tmux) |
-| Terminal mux | **tmux** -- prefix Ctrl-B, Catppuccin plugin with Vesper color overrides |
-| Session manager | **sesh** -- fuzzy session switcher for tmux |
+| Window manager | **AeroSpace** -- 5 workspaces pinned across two monitors |
+| Modifier key | **Hyperkey** -- Caps Lock → Esc on tap (kept for app shortcuts; not used by AeroSpace anymore) |
+| Status bar | Native macOS menu bar -- visible always, no custom bar |
+| Window borders | None -- AeroSpace's own focus is enough |
+| Terminal | **Ghostty** -- Vesper, JetBrainsMono 16 |
+| Terminal mux | **tmux** -- prefix Ctrl-B, resurrect + continuum for persistence |
+| Session manager | **sesh** -- fuzzy session switcher |
 | Shell | **zsh** + **starship** + **atuin** + **zoxide** |
 | Editor | **Zed** -- Vesper-ish, JetBrainsMono |
-| Browser | **Zen** -- primary; Brave + Safari as backups |
 | Launcher | **Raycast** -- app launching, system actions |
+| Calendar in menu bar | **MeetingBar** -- next event indicator |
 
 ## Config files
 
 | Path | Description |
 |------|-------------|
-| [.aerospace.toml](.aerospace.toml) | AeroSpace -- workspace pins, Hyper bindings, on-window-detected rules |
-| [bordersrc](bordersrc) | JankyBorders -- Vesper orange (active) / `#404040` (inactive) |
-| [sketchybar/](sketchybar/) | SketchyBar bar, items, plugins (Aerospace-aware) |
-| [config](config) | Ghostty terminal -- Vesper, JetBrainsMono Nerd Font 16 |
-| [.tmux.conf](.tmux.conf) | tmux -- Ctrl-B prefix, sesh integration, catppuccin w/ Vesper color overrides |
-| [zed/](zed/) | Zed editor settings + keymap + tasks |
-| [starship.toml](starship.toml) | Starship prompt (Nerd Font icons) |
-| [.zshrc](.zshrc) | Zsh -- aliases, starship init, atuin, zoxide, plugins (NOT in this repo's sync — contains secrets) |
+| [.aerospace.toml](.aerospace.toml) | AeroSpace -- workspaces, Alt-based keybindings, auto-pinning rules |
+| [config](config) | Ghostty terminal -- Vesper, JetBrainsMono 16 |
+| [.tmux.conf](.tmux.conf) | tmux -- Ctrl-B prefix, sesh, resurrect+continuum |
+| [zed/](zed/) | Zed editor |
+| [starship.toml](starship.toml) | Starship prompt |
 | [.zprofile](.zprofile) | Homebrew shellenv |
-| [.gitconfig](.gitconfig) | Git -- SSH signing, rebase on pull, rerere |
-| [Brewfile](Brewfile) | Homebrew taps, formulae, casks (regenerate with `brew bundle dump --force`) |
+| [.gitconfig](.gitconfig) | Git -- SSH signing, rebase on pull |
+| [Brewfile](Brewfile) | Homebrew taps, formulae, casks |
 | [macos-defaults.sh](macos-defaults.sh) | macOS preferences script |
-| [karabiner.json](karabiner.json) | Legacy -- replaced by Hyperkey.app; kept for reference |
-| [.gitignore](.gitignore) | Repo gitignore -- macOS junk, secrets |
+| [karabiner.json](karabiner.json) | Legacy -- superseded by Hyperkey |
 
-## Apps in /Applications
+## Workspaces
 
-Tiling/UI: **AeroSpace**, **SketchyBar** (formula), **JankyBorders** (formula), **Hyperkey**
+**External monitor (LG)** — primary focus surface
 
-Daily drivers: **Ghostty**, **Zed**, **Zen**, **Slack**, **Mail** (system), **Raycast**, **MeetingBar**, **Spotify**, **Claude**, **Loom**, **Shottr**, **PastePal**, **Bitwarden**, **Docker**, **AppCleaner**, **SF Symbols**, **Wipr**, **DisplayLink Manager**, **Brave Browser**, **Safari**, **zoom.us**
+| WS | Theme | Pinned apps |
+|----|-------|-------------|
+| 1 | code | Zed, Ghostty |
+| 2 | web | Chrome, Safari |
+| 3 | infra | terminals/dashboards (no auto-rules — place manually) |
 
-## Workspace layout
+**Built-in display (MacBook)** — communications + meetings
 
-| WS | Monitor | Pinned apps |
-|----|---------|-------------|
-| 1 | External (LG) | Zen, Ghostty |
-| 2 | External (LG) | Spotify, Zed, Claude (scratch) |
-| 3 | Built-in | Slack, Mail |
-| 4 | Built-in | Zoom (tiled, isolated for screensharing safety) |
+| WS | Theme | Pinned apps |
+|----|-------|-------------|
+| 4 | comms | Slack, Mail, ChatGPT, Claude, WhatsApp |
+| 5 | meetings | Zoom, Teams |
 
-## Daily keybindings (Hyper = Caps Lock)
+Why this split: external is reserved for deep focus, built-in is for incoming attention (chat + meetings). Putting Zoom on built-in also makes it safe to screenshare the external screen without leaking the meeting UI.
+
+## Floating utilities
+
+Auto-floated (so they don't tile awkwardly): Finder, Raycast, Calculator, System Settings, Bitwarden, PastePal, Shottr, SF Symbols, AppCleaner.
+
+## Keybindings
 
 | Keys | Action |
 |------|--------|
-| Hyper + 1..4 | Switch workspace |
-| Hyper + H/J/K/L | Focus left/down/up/right |
-| Hyper + Tab | Last workspace |
-| Hyper + Enter | AeroSpace fullscreen |
-| Hyper + F | macOS native fullscreen |
-| Hyper + T | Toggle floating ↔ tiling |
-| Hyper + E | Flatten workspace tree |
-| Hyper + ; | Service mode |
-| Alt + Shift + 1..4 | Move focused window to workspace |
-| Ctrl + Alt + H/J/K/L | Swap with window in direction |
-| Alt + Shift + H/J/K/L | Resize width/height |
+| Alt + H/J/K/L | Focus left/down/up/right |
+| Alt + Shift + H/J/K/L | Move window in direction |
+| Alt + 1..5 | Switch workspace |
+| Alt + Shift + 1..5 | Move focused window to workspace |
+| Alt + Tab | Last workspace |
+| Alt + F | Fullscreen (toggle) |
 
-tmux prefix is **Ctrl-B**. See `.tmux.conf` for splits (`u`/`m`), pane nav (Ctrl-h/j/k/l no prefix), sesh integration (`j` → last session), floax floating pane (`g`).
+That's it. No service mode, no layout toggles, no Hyper duplicates. Caps Lock still sends Esc on tap (via Hyperkey).
 
 ## Setup on a fresh machine
 
@@ -79,34 +78,15 @@ brew bundle --file=Brewfile
 # 2. Apply macOS defaults
 bash macos-defaults.sh
 
-# 3. Symlink configs into ~/ — adjust paths as needed
-#    (this repo expects ~/.config/aerospace, ~/.config/sketchybar, ~/.config/borders,
-#    ~/.config/ghostty, ~/.tmux.conf, etc.)
+# 3. Symlink configs into ~/
 
-# 4. Install tmux plugins (one-off)
+# 4. Install tmux plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~/.tmux/plugins/tpm/bin/install_plugins
 
-# 5. Install SF Symbols app (provides the icon font used by SketchyBar)
-brew install --cask sf-symbols
-
-# 6. Launch AeroSpace once; grant Accessibility in System Settings
+# 5. Launch AeroSpace, grant Accessibility
 open -a AeroSpace
 
-# 7. Launch Hyperkey once; grant Accessibility
+# 6. Launch Hyperkey, grant Accessibility
 open -a Hyperkey
 ```
-
-## Theme palette (Vesper)
-
-```
-background  #101010
-foreground  #ffffff
-muted       #a0a0a0
-selection   #3f3f3f
-accent      #ffc799   (orange — primary)
-mint        #99ffe4   (secondary accent)
-red         #ff8080   (danger)
-```
-
-Used across: AeroSpace borders, SketchyBar items, tmux status, Ghostty, Zed.
