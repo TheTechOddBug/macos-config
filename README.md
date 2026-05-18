@@ -62,7 +62,7 @@ Auto-floated (so they don't tile awkwardly): Finder, Raycast, Calculator, System
 |------|--------|
 | Alt + H/J/K/L | Focus left/down/up/right |
 | Alt + Shift + H/J/K/L | Move window in direction |
-| Alt + 1..5 | Switch workspace |
+| Hyper + 1..5 | Switch workspace |
 | Alt + Shift + 1..5 | Move focused window to workspace |
 | Alt + Tab | Last workspace |
 | Alt + F | Fullscreen (toggle) |
