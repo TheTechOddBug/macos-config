@@ -40,7 +40,7 @@ My macOS development environment. Senior-engineer minimum: AeroSpace for keyboar
 | WS | Theme | Pinned apps |
 |----|-------|-------------|
 | 1 | code | Zed, Ghostty |
-| 2 | web | Chrome, Safari |
+| 2 | web | Zen, Brave, Safari |
 | 3 | infra | terminals/dashboards (no auto-rules — place manually) |
 
 **Built-in display (MacBook)** — communications + meetings

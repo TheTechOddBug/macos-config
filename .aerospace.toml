@@ -77,7 +77,11 @@ run = ['move-node-to-workspace 1']
 
 # Workspace 2 — web (external)
 [[on-window-detected]]
-if.app-id = 'com.google.Chrome'
+if.app-id = 'app.zen-browser.zen'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
