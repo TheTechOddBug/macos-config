@@ -17,12 +17,7 @@ link() {
 }
 
 echo "Linking configs from $REPO into $HOME_DIR"
-link .aerospace.toml .config/aerospace/aerospace.toml
-link .tmux.conf .tmux.conf
 link config .config/ghostty/config
 link starship.toml .config/starship.toml
-link zed .config/zed
 
-echo "Done. Reload running tools:"
-echo "  aerospace reload-config"
-echo "  tmux source ~/.tmux.conf  # if a session is running"
+echo "Done."
